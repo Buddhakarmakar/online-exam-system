@@ -1,0 +1,32 @@
+
+<html>
+
+
+<body>
+<div class="admin-panel">
+
+    <p> <%=(typeof myMsg!='undefined')? myMsg:''%></p>
+    <form action="admin-panel" method="post">
+
+        <br>
+    <label>Question:</label>
+        <textarea  name="qname" placeholder="Question" required></textarea>
+        <br>
+    <label>Option 1/answer:</label>
+        <textarea  name="opt1" required></textarea>
+        <br>
+    <label>Option 2:</label>
+        <textarea  name="opt2" required></textarea>
+        <br>
+    <label>Option 3:</label>
+        <textarea name="opt3" required></textarea>
+        <br>
+    <label>Option 4:</label>
+        <textarea  name="opt4" required></textarea>
+    <br>
+    <button type="submit">Add</button>
+
+    </form>
+    </div>
+    </body>
+    </html>

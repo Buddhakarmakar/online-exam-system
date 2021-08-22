@@ -1,0 +1,80 @@
+
+* {
+    box-sizing: border-box;
+}
+
+
+
+ .logo{
+
+    padding:10px;
+    background-color:lightslategrey;
+    flex: 50%;
+}
+ .login_form{
+    flex: 50%;
+    padding:10px;
+    background-color: rgba(199, 199, 199, 0.61);
+}
+
+ input[type=text],[type=email],[type=password],[type=time],[type=number],[type=date]{
+     margin-left: 10px;
+
+     border-bottom: 3px solid #1c85bd;
+     border-top:none;
+     border-left: none;
+     border-radius: 5px;
+     margin-bottom: 10px;
+     padding:5px;
+     width:90%;
+
+ }
+input[type=text],[type=email],[type=password],[type=number],[type=time],[type=date]:focus{
+    outline: none;
+}
+
+@media (max-width: 800px) {
+    .logo {flex:20%}
+    .login_form {
+        flex: 80%;
+    }
+    .submit_button{
+        margin-left: 0px;
+
+    }
+}
+
+
+.submit_button {background-image: linear-gradient(to right, #135bac 0%, #78c293 51%, #1D976C  100%)}
+.submit_button {
+    width: 80%;
+    margin-left: 20px;
+
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 150% auto;
+    color: white;
+    border:none;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 10px;
+    display: block;
+    align-items: center;
+    cursor: pointer
+}
+
+.submit_button:focus {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+}
+.myButton{
+    box-shadow: 0 0 20px #eee;
+    width:85%;
+    margin-left: 35px;
+
+
+    border-radius: 10px;
+    display: block;
+    align-items: center;
+}

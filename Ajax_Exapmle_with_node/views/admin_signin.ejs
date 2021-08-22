@@ -1,0 +1,141 @@
+<html>
+<title>Admin Registration</title>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
+
+</head>
+<body>
+
+    <div class="container ">
+
+
+        <nav class="navbar navbar-nav navbar-expand-md bg-dark navbar-dark  fixed-top ml-2">
+            <a class="navbar-brand" href="#">Online Exam</a>
+            <button type="button" class="navbar-toggler"  data-toggle="collapse" data-target="#toggleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="toggleNavbar">
+                <ul class="navbar-nav" >
+                    <li class=" nav-item"> <a class="nav-link" href="/admin" id="admin_model" >Admin</a></li>
+                    <li class="nav-item"><a class="nav-link"  href="/student" id="student">Student</a> </li>
+                    <li class="nav-item"><a class="nav-link"  href="/about_us">About Us</a> </li>
+                    <li class="nav-item"><a class="nav-link"  href="/contact_us">Contact US</a> </li>
+                </ul>
+            </div>
+
+
+        </nav>
+    </div>
+
+
+        <br>
+        <br>
+    <br>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-header">Admin Panel</div>
+                        <div class="card-body">
+                            <div class="card-title"> <h4>Admin log In</h4></div>
+                            <form method="post" action="/admin_signin" id="admin_signin">
+                                <label for="email">Enter Email:</label>
+                                <input type="email" class="form-control" name="email">
+                                <span id="invalidEmail"></span>
+                                <label for="password">Enter Password</label>
+                                <input type="password" class="form-control" name="password">
+                                <spnn id="invalidPassword"></spnn>
+
+                                <br>
+                                <input type="submit" value="Sign In" id="admin_signin_btn"class="btn btn-success form-control">
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <h6>Not yet A member <a href="/admin">Register</a></h6>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#admin_signin').on('submit',function (event) {
+                event.preventDefault();
+                $.ajax({
+                    url:'/admin_signin',
+                    method:'post',
+                    data:$(this).serialize(),
+                    dataType:'json',
+                    beforeSend:function () {
+                        $('#admin_signin_btn').attr('disabled','disabled');
+                        $('#admin_signin_btn').val("Signing In");
+
+                    },
+                    success:function (data) {
+                        if(data.success){
+                            console.log("siginig in success");
+                            $('#invalidEmail').remove();
+                            $('#invalidPassword').remove();
+                          //  $('#admin_signin').remove();
+                          location.href="/admin_dashboard";
+
+                        /*    $.ajax({
+
+
+                                url:'/admin_dashboard',
+                                method: "post",
+                                success:function () {
+                                    location.href="/admin_dashboard";
+                                }
+                            })
+                            *
+                         */
+
+
+
+                        }
+                        else if(data.invalidEmail){
+                           // $('#invalidPassword').remove();
+
+                            console.log('Invalid Email Address');
+                            $('#invalidEmail').html('<div class="alert alert-danger form-control">Wrong Emmail Address</div>');
+                            $('#admin_signin_btn').attr('disabled',false);
+                            $('#admin_signin_btn').val("Sign In");
+                        }
+                        else if(data.invalidPassword){
+                            console.log('Invalid Password');
+                            $('#invalidEmail').remove();
+                            $('#invalidPassword').html('<div class="alert alert-danger form-control">Wrong Password</div>')
+                            $('#admin_signin_btn').attr('disabled',false);
+                            $('#admin_signin_btn').val("Sign In");
+                        }
+
+
+                    }
+                })
+
+            })
+        })
+    </script>
+</body>
+</html>

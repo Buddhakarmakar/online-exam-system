@@ -1,0 +1,446 @@
+<html>
+<title>Admin Registration</title>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+
+
+</head>
+<body>
+<div class="jumbotron jumbotron-fluid" >
+    <div class="container ">
+        <h1>Welcome <span><%=email%></span></h1>
+    </div>
+</div>
+
+
+<div class="container-fluid">
+    <nav class="navbar navbar-nav navbar-expand-md bg-dark navbar-dark ">
+            <a class="navbar-brand" href="#">
+               <img  src="./public/images/logo.png" height="40px" width="50px">Online Exam</img>
+            </a>
+        <button type="button" class="navbar-toggler"  data-toggle="collapse" data-target="#toggleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="toggleNavbar">
+            <ul class="navbar-nav " >
+
+                <li class="nav-item"><a class="nav-link" href="#" id="exam">Exam</a></li>
+
+
+            </ul>
+            <ul class="navbar-nav ml-auto" >
+
+
+                <li class="nav-item "><button class="btn btn-outline-light" id="logout_btn">
+                        <i class="fa fa-sign-out"></i>Log Out</button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-outline-primary"  id="add_exam_model">Add Exam</button>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+    <div id="delete_msg"></div>
+    <div class="modal fade" id="add_exam">
+        <div class="modal-dialog  modal-dialog-centered ">
+            <form id="add_exam_form">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="modal_title"></h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                            <div class="row">
+                                <span id="exam_adding_success"></span>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <label for="exam_title" class="col-md-4 text-right">Exam Title</label>
+                                    <div class="col-md-8"> <input type="text" name="exam_title" id="exam_title" class="form-control" required>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <label  class="col-md-4 text-right">Exam Date</label>
+                                    <div class="col-md-8">
+
+                                        <input type="date" name="exam_date" id="exam_date" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <label  class="col-md-4 text-right">Exam Time</label>
+                                <div class="col-md-8">
+
+                                    <input type="time" name="exam_time" id="exam_time" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <label  class="col-md-4 text-right">Duration</label>
+                                    <div class="col-md-8">
+                                        <select name="exam_duration" id="exam_duration" class="form-control" required>
+                                            <option value="">Select Option</option>
+                                            <option value="5">5 Minute</option>
+                                            <option value="10">10 Minute</option>
+                                            <option value="15">15 Minute</option>
+                                            <option value="20">0 Minute</option>
+                                            <option value="25">25 Minute</option>
+                                            <option value="30">30 Minute</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="col-md-4">Total Number Of Question</label>
+                                    <div class="col-md-8">
+                                        <select name="total_ques" id="total_ques" class="form-control" required>
+                                            <option value="">select Option</option>
+                                            <option value="5">5 Questions</option>
+                                            <option value="10">10 Questions</option>
+                                            <option value="15">15 Questions</option>
+                                            <option value="20">0 Questions</option>
+                                            <option value="25">25 Questions</option>
+                                            <option value="30">30 Questions</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <label class="col-md-4">Marks For Right Answer</label>
+                                    <div class="col-md-8">
+                                        <select name="marks_per_right_ans" id="marks_per_right_ans" class="form-control" required>
+                                            <option value="">select Option</option>
+                                            <option value="1">+1 MArks</option>
+                                            <option value="1.5">+1.5 Marks</option>
+                                            <option value="2">+2 Marks</option>
+                                            <option value="2.5">+2.5 Marks</option>
+                                            <option value="3">+3 Marks</option>
+                                            <option value="3.5">3.5 Marks</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="row">
+                                    <label class="col-md-4">Marks For Wrong Answer</label>
+                                    <div class="col-md-8">
+                                        <select name="marks_per_wrong_ans" id="marks_per_wrong_ans" class="form-control" required>
+                                            <option value="">select Option</option>
+                                            <option value="1">-1 MArks</option>
+                                            <option value="1.5">-1.5 Marks</option>
+                                            <option value="2">-2 Marks</option>
+                                            <option value="2.5">-2.5 Marks</option>
+                                            <option value="3">-3 Marks</option>
+                                            <option value="3.5">-3.5 Marks</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <input type="submit" value="add" id="add_exam_btn" class="btn btn-success form-control">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="col-sm-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" id="exam_data_table">
+                    <thead>
+                        <tr class="bg-dark text-white">
+
+                            <th>Exam Title</th>
+                            <th>Date Time</th>
+                            <th>Duration</th>
+                            <th>Total Question</th>
+                            <th>Marks Per Right Ans</th>
+                            <th>Marks per Wrong ans</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                            <%if(mydata.length>0){
+                                mydata.forEach(function (data) {
+                             %>
+                                <tr>
+                                    <td> <%=data.exam_title%></td>
+                                    <td> <%-data.exam_time%></td>
+                                    <td> <%=data.exam_duration%></td>
+                                    <td><%=data.exam_total_ques%></td>
+                                    <td><%=data.marks_per_right_ans%></td>
+                                    <td><%=data.marks_per_wrong_ans%></td>
+
+                                    <td><%-data.exam_status%></td>
+                                    <td><%-data.exam_action%></td>
+                                </tr>
+                            <%
+                                })
+                            }%>
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="delete_exam_modal">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Are You sure?</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                 This will Permanently Deleted
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button class="btn btn-danger" id="delete_exam" >Delete</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+
+<script>
+    $(document).ready(function(){
+
+
+
+   let dataTable=$('#exam_data_table').DataTable();
+
+
+
+        $('#logout_btn').click(function () {
+
+            $.ajax({
+                url:'/logout',
+                method:'post',
+
+                success:function (data) {
+                    if(data.success){
+                        location.href='/admin_signin';
+                        console.log("LogOut")
+                    }
+                    else{
+                        console.log("Failed to logout")
+                    }
+
+                }
+            })
+        });
+        $('#add_exam_model').click(function () {
+            $('#exam_adding_success').html('');
+            $('#modal_title').text('Add Exam Detail');
+            $('#add_exam').modal('show');
+            $('#add_exam_form')[0].reset();
+
+
+        });
+
+
+
+        $('#add_exam_form').on('submit',function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url:'/add_exam',
+                method:'post',
+                data:$(this).serialize(),
+                dataType:'json',
+                beforeSend:function () {
+                    $('#add_exam_btn').attr("disabled",'disabled');
+                    $('#add_exam_btn').val('Processing');
+                },
+                success:function (data) {
+                    if(data.success){
+                        $('#add_exam_btn').attr("disabled",false);
+                        $('#add_exam_btn').val('Add');
+                        $('#add_exam_form')[0].reset();
+                       // dataTable.draw();
+                        //dataTable.ajax.reload();
+                        $('#exam_adding_success').html('<div class="alert alert-success alert-dismissible" > Exam Added Successfully' +
+                        ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+
+
+                        $.ajax({
+                            url:'/admin_dashboard',
+                            method:'get',
+                           // success:function () {
+                                //dataTable.ajax.reload();
+
+                            //}
+                        })
+                    }
+
+                }
+
+            })
+
+
+        })
+
+
+
+        //Edit Exam Details
+
+        $(document).on('click','.edit_exam',function () {
+
+
+            exam_id=$(this).attr('id');
+            console.log(exam_id)
+
+
+
+
+
+            $('#exam_adding_success').html('');
+            $('#modal_title').text('Edit Exam Detail');
+            $('#add_exam').modal('show');
+            $('#add_exam_form')[0].reset();
+            $('#add_exam_btn').val("Edit")
+            $.ajax({
+                url:'/edit_exam',
+                method:'post',
+                data:{exam_id:exam_id},
+                success:function (data) {
+                    date=data.exam_date
+                    console.log(date)
+                    $('#exam_title').val(data.exam_title);
+                   $('.exam_date').val(data.exam_date)
+                  //  document.getElementById("exam_date").value=data.exam_date;
+                    $('#exam_time').val(data.exam_time)
+                    $('#exam_duration').val(data.exam_duration)
+                    $('#marks_per_right_ans').val(data.marks_per_right_ans)
+                    $('#marks_per_wrong_ans').val(data.marks_per_wrong_ans)
+                    $('#total_ques').val(data.exam_total_ques)
+
+                }
+            })
+
+
+
+        });
+
+    $(document).on('click','.delete_exam',function () {
+        exam_id=$(this).attr('id');
+        console.log(exam_id)
+        $('#delete_exam_modal').modal('show')
+        $('#delete_exam').on('click',function () {
+            $.ajax({
+                url:'/delete_exam',
+                method:"post",
+                data:{exam_id:exam_id},
+                success:function (data) {
+                    if(data.success) {
+                        $('#delete_exam_modal').modal('hide');
+                      //  dataTable.ajax.reload()
+                        $('#delete_msg').html('<div class="alert alert-success alert-dismissible" > Exam Deleted Successfully' +
+                            ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>')
+                    }
+
+                }
+            })
+
+        })
+
+    })
+/*
+        $('#add_exam_form').on('submit',function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url:'/add_exam',
+                method:'post',
+                data:$(this).serialize(),
+                dataType:'json',
+                beforeSend:function () {
+                    $('#add_exam_btn').attr("disabled",'disabled');
+                    $('#add_exam_btn').val('Processing');
+                },
+                success:function (data) {
+                    if(data.success){
+                        $('#add_exam_btn').attr("disabled",false);
+                        $('#add_exam_btn').val('Add');
+                        $('#add_exam_form')[0].reset();
+                        // dataTable.draw();
+                        //dataTable.ajax.reload();
+                        $('#exam_adding_success').html('<div class="alert alert-success alert-dismissible" > Exam Added Successfully' +
+                            ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+
+
+                        $.ajax({
+                            url:'/admin_dashboard',
+                            method:'get',
+                            // success:function () {
+                            //dataTable.ajax.reload();
+
+                            //}
+                        })
+                    }
+
+                }
+
+            })
+
+
+        })
+        */
+
+
+    })
+</script>
+</body>
+</html>

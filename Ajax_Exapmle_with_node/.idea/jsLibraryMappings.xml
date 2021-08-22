@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="PROJECT" libraries="{bootstrap, bootstrap-datetimepicker, font-awesome, jquery, jquery-2.2.4, jquery-datetimepicker, jquery.dataTables, jqueryui, moment-with-locales, parsley.js, popper.js, rainbow-custom}" />
+    <includedPredefinedLibrary name="Node.js Core" />
+  </component>
+</project>

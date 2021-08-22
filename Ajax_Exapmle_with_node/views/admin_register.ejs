@@ -1,0 +1,177 @@
+<html>
+<title>Admin Registration</title>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+</head>
+<body>
+        <div class="jumbotron jumbotron-fluid " >
+            <div class="container ">
+                <h3>Welcome To Dashboard</h3>
+
+                    <nav class="navbar navbar-nav navbar-expand-md bg-dark navbar-dark  fixed-top ml-2">
+                        <a class="navbar-brand" href="#">Online Exam</a>
+                        <button type="button" class="navbar-toggler"  data-toggle="collapse" data-target="#toggleNavbar">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="toggleNavbar">
+                            <ul class="navbar-nav" >
+                                <li class=" nav-item"> <a class="nav-link" href="/admin" id="admin_model" >Admin</a></li>
+                                <li class="nav-item"><a class="nav-link"  href="/student" id="student">Student</a> </li>
+                                <li class="nav-item"><a class="nav-link"  href="/about_us">About Us</a> </li>
+                                <li class="nav-item"><a class="nav-link"  href="/contact_us">Contact US</a> </li>
+                            </ul>
+                        </div>
+
+
+                    </nav>
+            </div>
+
+            </div>
+        </div>
+
+
+        <div class="container-fluid">
+
+        </div>
+
+        <div class="container">
+            <span class="row">
+
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                      <span id="alert_msg"></span>
+                    <div class="card">
+                        <div class="card-header">Admin Panel</div>
+                        <div class="card-body">
+                            <div class="card-title"> <h4>Admin Register</h4></div>
+                            <form method="post"  id="admin_registration"  action="/admin_registration">
+                                <label for="first_name">First Name</label>
+                                <input type="text" class="form-control" name="first_name" required>
+                                <label for="last_name">Last Name</label>
+                                <input type="text" class="form-control" name="last_name" required>
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" name="email" required>
+                                <span id="email_error"></span>
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" name="password" required>
+                             <br>
+
+
+                                <input type="submit" value="Register" class="btn btn-success form-control" id="admin_register_btn">
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <h6>Already A member <a href="/admin_signin">Sign In</a></h6>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+        </div>
+<script>
+
+    $(document).ready(function () {
+        $('#admin_registration').on('submit',function(event){
+            event.preventDefault();
+          /*  window.Parsley.addValidator('check_email',{
+                    validateString:function (value) {
+                        return $.ajax({
+                            url:'/check_admin_email',
+                            method:'post',
+                            data:{email:value},
+                            dataType:'json',
+                            success:function (data) {
+                                if(data.success){
+                                    console.log("Checking Admin Email");
+                                    return true;
+                                }
+
+                            }
+
+                        })
+
+                    }
+                }
+            );
+            $('#admin_registration').parsley();
+            */
+
+
+
+                    $.ajax({
+                        url: '/admin_registration',
+                        method: 'post',
+                        data: $(this).serialize(),
+                        dataType: 'json',
+                        beforeSend: function () {
+                            $('#admin_register_btn').attr('disabled', 'disabled');
+                            $('#admin_register_btn').val('Please Wait');
+                            $('#admin_register_btn').prepend('<div class="spinner-border"></div>');
+
+                        },
+                        success: function (data) {
+                            console.log("Success Ajax request")
+                            if (data.success) {
+                                $('#alert_msg').html('');
+                                console.log('Register Successs');
+                                $('#admin_registration')[0].reset();
+                                $('#admin_register_btn').attr('disabled', false);
+                                $('#admin_register_btn').val('Register');
+                                $('#email_error').remove();
+                                alert('Registration Successful');
+
+                            } else if (data.emailError) {
+                                $('#email_error').html('<div class="alert alert-warning" > Email Already Exists</div>');
+                                $('#admin_register_btn').attr('disabled', false);
+                                $('#admin_register_btn').val('Register');
+                                $('#alert_msg').remove();
+                            }
+                        }
+
+                    })
+
+
+        });
+
+
+
+     /*   window.Parsley.addValidator('checkemail',{
+            validateString:function (value) {
+                return $.ajax({
+                    url:'/check_admin_email',
+                    method:'post',
+                    data:{email:value},
+                    dataType:'json',
+                    success:function (data) {
+                        if(data.success){
+                            console.log("Checking Admin Email");
+                            return true;
+                        }
+
+                    }
+
+                })
+
+            }
+            }
+        );
+        *
+      */
+
+    })
+</script>
+</body>
+</html>
